@@ -301,7 +301,7 @@ class Address
      */
     public static function createFromXML(\SimpleXMLElement $xml)
     {
-        $address = new Address();
+        $address = new static();
 
         if (isset($xml->streetName) && $xml->streetName != '') {
             $address->setStreetName((string) $xml->streetName);
