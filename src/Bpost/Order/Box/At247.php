@@ -344,13 +344,9 @@ class At247 extends National
             );
         }
 
-        if(isset($xml->{'at24-7'}->unregistered) && $xml->{'at24-7'}->unregistered != '')
+        if(isset($xml->{'at24-7'}->unregistered))
         {
-            $unregisteredMember = $xml->{'at24-7'}->unregistered->children(
-                'http://schema.post.be/shm/deepintegration/v3/common'
-            );
-
-            $at247->setUnregisteredParcelLockerMember(UnregisteredParcelLockerMember::createFromXml($unregisteredMember));
+            $at247->setUnregisteredParcelLockerMember(UnregisteredParcelLockerMember::createFromXml($xml->{'at24-7'}->unregistered));
         }
 
         if (isset($xml->{'at24-7'}->receiverName) && $xml->{'at24-7'}->receiverName != '') {
