@@ -125,7 +125,7 @@ class UnregisteredParcelLockerMember extends ComplexAttribute
      */
     function toXml(\DOMDocument $document, $prefix = null, $type = null)
     {
-        $tagName = $this->getPrefixedTagName('unregisteredParcelLockerMember', $prefix);
+        $tagName = $this->getPrefixedTagName('unregistered', $prefix);
 
         $xml = $document->createElement($tagName);
 
