@@ -47,7 +47,7 @@ class At247Test extends \PHPUnit_Framework_TestCase
                     'countryCode' => 'BE',
                 ),
                 'memberId' => '188565346',
-                'unregisteredParcelLockerMember' => array(
+                'unregistered' => array(
                     'language' => 'EN',
                     'mobilePhone' => '0471000000',
                     'emailAddress' => 'pomme@antidot.com'
@@ -73,7 +73,7 @@ class At247Test extends \PHPUnit_Framework_TestCase
                     );
                 }
                 $at247->appendChild($address);
-            } elseif ($key == 'unregisteredParcelLockerMember') {
+            } elseif ($key == 'unregistered') {
                 $child = $expectedDocument->createElement($key);
                 foreach ($value as $key2 => $value2) {
                     $child->appendChild(
@@ -98,9 +98,9 @@ class At247Test extends \PHPUnit_Framework_TestCase
             $data['at24-7']['parcelsDepotAddress']['countryCode']
         );
         $unregisteredParcelLockerMember = new UnregisteredParcelLockerMember();
-        $unregisteredParcelLockerMember->setLanguage($data['at24-7']['unregisteredParcelLockerMember']['language']);
-        $unregisteredParcelLockerMember->setMobilePhone($data['at24-7']['unregisteredParcelLockerMember']['mobilePhone']);
-        $unregisteredParcelLockerMember->setEmailAddress($data['at24-7']['unregisteredParcelLockerMember']['emailAddress']);
+        $unregisteredParcelLockerMember->setLanguage($data['at24-7']['unregistered']['language']);
+        $unregisteredParcelLockerMember->setMobilePhone($data['at24-7']['unregistered']['mobilePhone']);
+        $unregisteredParcelLockerMember->setEmailAddress($data['at24-7']['unregistered']['emailAddress']);
 
         $at247 = new At247();
         $at247->setProduct($data['at24-7']['product']);

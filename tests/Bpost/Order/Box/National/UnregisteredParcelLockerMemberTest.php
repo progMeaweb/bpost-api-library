@@ -66,12 +66,12 @@ class UnregisteredParcelLockerMemberTest extends \PHPUnit_Framework_TestCase
     {
         return <<<EOF
 <?xml version="1.0" encoding="utf-8"?>
-<unregisteredParcelLockerMember>
+<unregistered>
   <language>EN</language>
   <mobilePhone>0123456789</mobilePhone>
   <emailAddress>pomme@antidot.com</emailAddress>
   <parcelLockerReducedMobilityZone/>
-</unregisteredParcelLockerMember>
+</unregistered>
 
 EOF;
     }
@@ -80,12 +80,12 @@ EOF;
     {
         return <<<EOF
 <?xml version="1.0" encoding="utf-8"?>
-<test:unregisteredParcelLockerMember>
+<test:unregistered>
   <test:language>EN</test:language>
   <test:mobilePhone>0123456789</test:mobilePhone>
   <test:emailAddress>pomme@antidot.com</test:emailAddress>
   <test:parcelLockerReducedMobilityZone/>
-</test:unregisteredParcelLockerMember>
+</test:unregistered>
 
 EOF;
     }
