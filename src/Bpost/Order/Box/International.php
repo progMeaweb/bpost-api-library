@@ -234,7 +234,7 @@ class International implements IBox
             foreach ($xml->international->options as $optionData) {
                 $optionData = $optionData->children('http://schema.post.be/shm/deepintegration/v3/common');
 
-                if (in_array($optionData->getName(), array(Messaging::MESSAGING_TYPE_INFO_DISTRIBUTED))) {
+                if (in_array($optionData->getName(), Messaging::getPossibleTypeValues())) {
                     $option = Messaging::createFromXML($optionData);
                 } else {
                     $className = '\\Bpost\\BpostApiClient\\Bpost\\Order\\Box\\Option\\' . ucfirst($optionData->getName());
