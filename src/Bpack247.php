@@ -11,7 +11,6 @@ use Bpost\BpostApiClient\Exception\BpostApiResponseException\BpostInvalidRespons
  * bPost Bpack24/7 class
  *
  * @author    Tijs Verkoyen <php-bpost@verkoyen.eu>
- * @version   3.0.0
  * @copyright Copyright (c), Tijs Verkoyen. All rights reserved.
  * @license   BSD License
  */
