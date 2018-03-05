@@ -105,8 +105,8 @@ class International implements IBox
      */
     public function setProduct($product)
     {
-        if (!in_array($product, self::getPossibleProductValues())) {
-            throw new BpostInvalidValueException('product', $product, self::getPossibleProductValues());
+        if (!in_array($product, static::getPossibleProductValues())) {
+            throw new BpostInvalidValueException('product', $product, static::getPossibleProductValues());
         }
 
         $this->product = $product;
