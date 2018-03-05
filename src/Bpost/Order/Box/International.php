@@ -221,7 +221,7 @@ class International implements IBox
      */
     public static function createFromXML(\SimpleXMLElement $xml)
     {
-        $international = new International();
+        $international = new static();
 
         if (isset($xml->international->product) && $xml->international->product != '') {
             $international->setProduct(
