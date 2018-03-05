@@ -446,7 +446,7 @@ class Bpost
         $url = '/productconfig';
 
         $headers = array(
-            'Accept: application/vnd.bpost.shm-productConfiguration-v3.1+XML',
+            'Accept: application/vnd.bpost.shm-productConfiguration-v3.5+XML',
         );
         /** @var \SimpleXMLElement $xml */
         $xml = $this->doCall(
@@ -548,11 +548,11 @@ class Bpost
 
         if ($asPdf) {
             $headers = array(
-                'Accept: application/vnd.bpost.shm-label-pdf-v3.4+XML'
+                'Accept: application/vnd.bpost.shm-label-pdf-v3.5+XML'
             );
         } else {
             $headers = array(
-                'Accept: application/vnd.bpost.shm-label-image-v3.4+XML',
+                'Accept: application/vnd.bpost.shm-label-image-v3.5+XML',
             );
         }
 
