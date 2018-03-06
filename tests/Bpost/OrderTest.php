@@ -137,7 +137,7 @@ class OrderTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('Rue de l\'Autonomie', $nationalBox->getPugoAddress()->getStreetName());
 
         $this->assertNotNull($nationalBox->getOptions());
-        //$this->assertCount(6, $nationalBox->getOptions());
+        $this->assertCount(6, $nationalBox->getOptions());
     }
 
     private function getFetchOrderWithReferenceXml()
