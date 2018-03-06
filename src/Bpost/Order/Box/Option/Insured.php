@@ -54,7 +54,6 @@ class Insured extends Option
      */
     public function setType($type)
     {
-
         if (!in_array($type, self::getPossibleTypeValues())) {
             throw new BpostInvalidValueException('type', $type, self::getPossibleTypeValues());
         }
@@ -141,15 +140,16 @@ class Insured extends Option
 
     /**
      * @param \SimpleXMLElement $xml
-     *
      * @return static
+     * @throws BpostInvalidValueException
      */
     public static function createFromXML(\SimpleXMLElement $xml)
     {
-        $data = $xml->{$xml->getName()}[0];
-
         $type = '';
         $value = 0;
+
+        $data = $xml->children('http://schema.post.be/shm/deepintegration/v3/common');
+
         if (isset($data->{static::INSURANCE_TYPE_BASIC_INSURANCE})) {
             $type = static::INSURANCE_TYPE_BASIC_INSURANCE;
             $value = (int)$data->{static::INSURANCE_TYPE_BASIC_INSURANCE}->attributes()->value;

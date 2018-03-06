@@ -79,6 +79,14 @@ class InsuredTest extends \PHPUnit_Framework_TestCase
         $this->assertSame($this->getNamespaceXml(), $document->saveXML());
     }
 
+    public function testCreateFromXml()
+    {
+        $insured = Insured::createFromXML(simplexml_load_string($this->getXml()));
+
+        $this->assertSame(Insured::INSURANCE_TYPE_ADDITIONAL_INSURANCE, $insured->getType());
+        $this->assertSame(Insured::INSURANCE_AMOUNT_UP_TO_2500_EUROS, $insured->getValue());
+    }
+
     /**
      * Test validation in the setters
      */
