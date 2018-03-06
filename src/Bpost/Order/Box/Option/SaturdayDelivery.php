@@ -29,4 +29,10 @@ class SaturdayDelivery extends Option
 
         return $document->createElement($tagName);
     }
+
+    public static function createFromXML(\SimpleXMLElement $element)
+    {
+        return new static();
+    }
+
 }
