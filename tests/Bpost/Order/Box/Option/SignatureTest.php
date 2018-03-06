@@ -1,7 +1,7 @@
 <?php
 namespace Bpost;
 
-use Bpost\BpostApiClient\Bpost\Order\Box\Option\Signature;
+use Bpost\BpostApiClient\Bpost\Order\Box\Option\Signed;
 
 class SignatureTest extends \PHPUnit_Framework_TestCase
 {
@@ -20,7 +20,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Signature->toXML
+     * Tests Signed->toXML
      */
     public function testToXML()
     {
@@ -30,7 +30,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         );
 
         $actualDocument = self::createDomDocument();
-        $signature = new Signature();
+        $signature = new Signed();
         $actualDocument->appendChild(
             $signature->toXML($actualDocument)
         );
@@ -43,7 +43,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
         );
 
         $actualDocument = self::createDomDocument();
-        $signature = new Signature();
+        $signature = new Signed();
         $actualDocument->appendChild(
             $signature->toXML($actualDocument, 'foo')
         );

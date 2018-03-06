@@ -18,7 +18,7 @@ use \Bpost\BpostApiClient\Bpost\Order\Box\Option\AutomaticSecondPresentation;
 use \Bpost\BpostApiClient\Bpost\Order\Box\Option\CashOnDelivery;
 use \Bpost\BpostApiClient\Bpost\Order\Box\Option\Insured;
 use \Bpost\BpostApiClient\Bpost\Order\Box\Option\Messaging;
-use \Bpost\BpostApiClient\Bpost\Order\Box\Option\Signature;
+use \Bpost\BpostApiClient\Bpost\Order\Box\Option\Signed;
 use \Bpost\BpostApiClient\Bpost\Order\Box\OpeningHour\Day as OpeningHourDay;
 use \Bpost\BpostApiClient\Bpost\Order\Line as OrderLine;
 use \Bpost\BpostApiClient\Bpost\Order\Receiver;
@@ -90,7 +90,7 @@ $option = new Messaging('infoDistributed', 'NL', 'bpost@verkoyen.eu');
 //    'BE19210023508812',
 //    'GEBABEBB'
 //);
-//$option = new Signature();
+//$option = new Signed();
 //$option = new Insured('additionalInsurance', 3);
 //$option = new AutomaticSecondPresentation();
 

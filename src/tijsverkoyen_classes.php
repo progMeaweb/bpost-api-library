@@ -20,7 +20,7 @@ namespace TijsVerkoyen\Bpost\Bpost\Order\Box\Option { /** @deprecated */ class C
 namespace TijsVerkoyen\Bpost\Bpost\Order\Box\Option { /** @deprecated */ class Insurance extends \Bpost\BpostApiClient\Bpost\Order\Box\Option\Insured {} } // src/Bpost/Order/Box/Option/Insurance.php
 namespace TijsVerkoyen\Bpost\Bpost\Order\Box\Option { /** @deprecated */ class Messaging extends \Bpost\BpostApiClient\Bpost\Order\Box\Option\Messaging {} } // src/Bpost/Order/Box/Option/Messaging.php
 namespace TijsVerkoyen\Bpost\Bpost\Order\Box\Option { /** @deprecated */ class SaturdayDelivery extends \Bpost\BpostApiClient\Bpost\Order\Box\Option\SaturdayDelivery {} } // src/Bpost/Order/Box/Option/SaturdayDelivery.php
-namespace TijsVerkoyen\Bpost\Bpost\Order\Box\Option { /** @deprecated */ class Signature extends \Bpost\BpostApiClient\Bpost\Order\Box\Option\Signature {} } // src/Bpost/Order/Box/Option/Signature.php
+namespace TijsVerkoyen\Bpost\Bpost\Order\Box\Option { /** @deprecated */ class Signature extends \Bpost\BpostApiClient\Bpost\Order\Box\Option\Signed {} } // src/Bpost/Order/Box/Option/Signature.php
 namespace TijsVerkoyen\Bpost\Bpost\Order { /** @deprecated */ class Customer extends \Bpost\BpostApiClient\Bpost\Order\Customer {} } // src/Bpost/Order/Customer.php
 namespace TijsVerkoyen\Bpost\Bpost\Order { /** @deprecated */ class Line extends \Bpost\BpostApiClient\Bpost\Order\Line {} } // src/Bpost/Order/Line.php
 namespace TijsVerkoyen\Bpost\Bpost\Order { /** @deprecated */ class ParcelsDepotAddress extends \Bpost\BpostApiClient\Bpost\Order\ParcelsDepotAddress {} } // src/Bpost/Order/ParcelsDepotAddress.php

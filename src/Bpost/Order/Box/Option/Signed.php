@@ -2,13 +2,13 @@
 namespace Bpost\BpostApiClient\Bpost\Order\Box\Option;
 
 /**
- * bPost Signature class
+ * bPost Signed class
  *
  * @author    Tijs Verkoyen <php-bpost@verkoyen.eu>
  * @copyright Copyright (c), Tijs Verkoyen. All rights reserved.
  * @license   BSD License
  */
-class Signature extends Option
+class Signed extends Option
 {
     /**
      * Return the object as an array for usage in the XML
