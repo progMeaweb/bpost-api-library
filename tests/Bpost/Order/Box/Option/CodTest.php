@@ -82,4 +82,26 @@ class CodTest extends \PHPUnit_Framework_TestCase
 
         $this->assertSame($expectedDocument->saveXML(), $actualDocument->saveXML());
     }
+
+
+    public function testCreateFromXML(){
+        $cod = Cod::createFromXML(simplexml_load_string($this->getXml()));
+
+        $this->assertSame(1234, $cod->getAmount());
+        $this->assertSame("SOMEIBAN", $cod->getIban());
+        $this->assertSame("SOMEBIC", $cod->getBic());
+    }
+
+    private function getXml()
+    {
+        return <<<XML
+<?xml version="1.0" encoding="UTF-8"?>
+<common:cod xmlns="http://schema.post.be/shm/deepintegration/v3/national" xmlns:common="http://schema.post.be/shm/deepintegration/v3/common" xmlns:tns="http://schema.post.be/shm/deepintegration/v3/" xmlns:international="http://schema.post.be/shm/deepintegration/v3/international" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://schema.post.be/shm/deepintegration/v3/">
+  <common:codAmount>1234</common:codAmount>
+  <common:iban>SOMEIBAN</common:iban>
+  <common:bic>SOMEBIC</common:bic>
+</common:cod>
+
+XML;
+    }
 }

@@ -131,6 +131,22 @@ class Cod extends Option
 
 
     public static function createFromXML(\SimpleXMLElement $element){
-        return new static();
+        $cod = new static();
+
+        $data = $element->children('http://schema.post.be/shm/deepintegration/v3/common');
+
+        if(isset($data->codAmount)){
+            $cod->setAmount((int) $data->codAmount);
+        }
+
+        if(isset($data->bic)){
+            $cod->setBic((string) $data->bic);
+        }
+
+        if(isset($data->iban)){
+            $cod->setIban((string) $data->iban);
+        }
+
+        return $cod;
     }
 }
