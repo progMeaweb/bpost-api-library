@@ -62,10 +62,9 @@ class InsuredTest extends \PHPUnit_Framework_TestCase
      */
     public function testToXML()
     {
-        $self = new Insured(
-            Insured::INSURANCE_TYPE_ADDITIONAL_INSURANCE,
-            Insured::INSURANCE_AMOUNT_UP_TO_2500_EUROS
-        );
+        $self = new Insured();
+        $self->setType(Insured::INSURANCE_TYPE_ADDITIONAL_INSURANCE);
+        $self->setValue(Insured::INSURANCE_AMOUNT_UP_TO_2500_EUROS);
 
         // Without specific prefix
         $rootDom = $this->createDomDocument();
@@ -86,7 +85,8 @@ class InsuredTest extends \PHPUnit_Framework_TestCase
     public function testFaultyProperties()
     {
         try {
-            new Insured(str_repeat('a', 10));
+            $insured = new Insured();
+            $insured->setType(str_repeat('a', 10));
             $this->fail('BpostInvalidValueException not launched');
         } catch (BpostInvalidValueException $e) {
             // Nothing, the exception is good
@@ -95,7 +95,9 @@ class InsuredTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            new Insured('additionalInsurance', str_repeat('1', 10));
+            $insured = new Insured();
+            $insured->setType('additionalInsurance');
+            $insured->setValue(str_repeat('1', 10));
             $this->fail('BpostInvalidValueException not launched');
         } catch (BpostInvalidValueException $e) {
             // Nothing, the exception is good

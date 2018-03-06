@@ -42,11 +42,11 @@ class CodTest extends \PHPUnit_Framework_TestCase
         $expectedDocument->appendChild($cod);
 
         $actualDocument = self::createDomDocument();
-        $cashOnDelivery = new Cod(
-            $data['cod']['codAmount'],
-            $data['cod']['iban'],
-            $data['cod']['bic']
-        );
+        $cashOnDelivery = new Cod();
+        $cashOnDelivery->setAmount($data['cod']['codAmount']);
+        $cashOnDelivery->setIban($data['cod']['iban']);
+        $cashOnDelivery->setBic($data['cod']['bic']);
+
         $actualDocument->appendChild(
             $cashOnDelivery->toXML($actualDocument)
         );
@@ -71,11 +71,11 @@ class CodTest extends \PHPUnit_Framework_TestCase
         $expectedDocument->appendChild($cod);
 
         $actualDocument = self::createDomDocument();
-        $cashOnDelivery = new Cod(
-            $data['cod']['codAmount'],
-            $data['cod']['iban'],
-            $data['cod']['bic']
-        );
+        $cashOnDelivery = new Cod();
+        $cashOnDelivery->setAmount($data['cod']['codAmount']);
+        $cashOnDelivery->setIban($data['cod']['iban']);
+        $cashOnDelivery->setBic($data['cod']['bic']);
+        
         $actualDocument->appendChild(
             $cashOnDelivery->toXML($actualDocument, 'foo')
         );

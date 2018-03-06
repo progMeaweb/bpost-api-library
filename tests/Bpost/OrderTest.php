@@ -54,7 +54,13 @@ class OrderTest extends \PHPUnit_Framework_TestCase
             new Messaging('keepMeInformed', 'EN', null, '0032475123456'),
         ));
         $atBpost->addOption(new SaturdayDelivery());
-        $atBpost->addOption(new Cod(1251, 'BE19210023508812', 'GEBABEBB'));
+
+        $cod = new Cod();
+        $cod->setAmount(1251);
+        $cod->setBic('GEBABEBB');
+        $cod->setIban('BE19210023508812');
+
+        $atBpost->addOption($cod);
 
         $atBpost->setWeight(2000);
 

@@ -111,20 +111,6 @@ class Insured extends Option
     }
 
     /**
-     * @param string      $type
-     * @param string|null $value
-     *
-     * @throws BpostInvalidValueException
-     */
-    public function __construct($type, $value = null)
-    {
-        $this->setType($type);
-        if ($value !== null) {
-            $this->setValue($value);
-        }
-    }
-
-    /**
      * Return the object as an array for usage in the XML
      *
      * @param  \DomDocument $document
@@ -179,6 +165,10 @@ class Insured extends Option
             }
         }
 
-        return new static($type, $value);
+        $insured = new static();
+        $insured->setType($type);
+        $insured->setValue($value);
+
+        return $insured;
     }
 }

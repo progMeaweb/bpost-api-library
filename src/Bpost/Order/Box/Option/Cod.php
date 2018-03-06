@@ -74,18 +74,6 @@ class Cod extends Option
     }
 
     /**
-     * @param float  $amount
-     * @param string $iban
-     * @param string $bic
-     */
-    public function __construct($amount, $iban, $bic)
-    {
-        $this->setAmount($amount);
-        $this->setIban($iban);
-        $this->setBic($bic);
-    }
-
-    /**
      * Return the object as an array for usage in the XML
      *
      * @param  \DomDocument $document
