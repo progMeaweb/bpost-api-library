@@ -1,10 +1,10 @@
 <?php
 namespace Bpost;
 
-use Bpost\BpostApiClient\Bpost\Order\Box\Option\Insurance;
+use Bpost\BpostApiClient\Bpost\Order\Box\Option\Insured;
 use Bpost\BpostApiClient\Exception\BpostLogicException\BpostInvalidValueException;
 
-class InsuranceTest extends \PHPUnit_Framework_TestCase
+class InsuredTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Create a generic DOM Document
@@ -58,13 +58,13 @@ class InsuranceTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests Insurance->toXML
+     * Tests Insured->toXML
      */
     public function testToXML()
     {
-        $self = new Insurance(
-            Insurance::INSURANCE_TYPE_ADDITIONAL_INSURANCE,
-            Insurance::INSURANCE_AMOUNT_UP_TO_2500_EUROS
+        $self = new Insured(
+            Insured::INSURANCE_TYPE_ADDITIONAL_INSURANCE,
+            Insured::INSURANCE_AMOUNT_UP_TO_2500_EUROS
         );
 
         // Without specific prefix
@@ -86,7 +86,7 @@ class InsuranceTest extends \PHPUnit_Framework_TestCase
     public function testFaultyProperties()
     {
         try {
-            new Insurance(str_repeat('a', 10));
+            new Insured(str_repeat('a', 10));
             $this->fail('BpostInvalidValueException not launched');
         } catch (BpostInvalidValueException $e) {
             // Nothing, the exception is good
@@ -95,7 +95,7 @@ class InsuranceTest extends \PHPUnit_Framework_TestCase
         }
 
         try {
-            new Insurance('additionalInsurance', str_repeat('1', 10));
+            new Insured('additionalInsurance', str_repeat('1', 10));
             $this->fail('BpostInvalidValueException not launched');
         } catch (BpostInvalidValueException $e) {
             // Nothing, the exception is good

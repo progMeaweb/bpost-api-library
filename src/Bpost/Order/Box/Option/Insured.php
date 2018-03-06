@@ -4,13 +4,13 @@ namespace Bpost\BpostApiClient\Bpost\Order\Box\Option;
 use Bpost\BpostApiClient\Exception\BpostLogicException\BpostInvalidValueException;
 
 /**
- * bPost Insurance class
+ * bPost Insured class
  *
  * @author    Tijs Verkoyen <php-bpost@verkoyen.eu>
  * @copyright Copyright (c), Tijs Verkoyen. All rights reserved.
  * @license   BSD License
  */
-class Insurance extends Option
+class Insured extends Option
 {
 
     const INSURANCE_TYPE_BASIC_INSURANCE = 'basicInsurance';
