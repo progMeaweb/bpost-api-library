@@ -104,7 +104,7 @@ class BpostOnAppointmentTest extends \PHPUnit_Framework_TestCase
 
     public function testCreateFromNotBpostOnAppointmentXml()
     {
-        $this->setExpectedException('Bpost\BpostApiClient\Exception\XmlException\BpostXmlInvalidItemException');
+        $this->expectException('Bpost\BpostApiClient\Exception\XmlException\BpostXmlInvalidItemException');
         BpostOnAppointment::createFromXml(new \SimpleXMLElement($this->getNotBpostOnAppointmentXml()));
     }
 
