@@ -99,6 +99,8 @@ class NationalTest extends \PHPUnit_Framework_TestCase
         $this->assertSame('-/-', $openingHours[2]->getValue());
 
         $this->assertSame('Place your delivery instructions here', $self->getDesiredDeliveryPlace());
+
+        $this->assertCount(4, $self->getOptions());
     }
 
     private function getXml()

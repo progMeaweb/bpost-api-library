@@ -101,7 +101,7 @@ class AtHomeTest extends \PHPUnit_Framework_TestCase
     }
 
     public function testCreateFromBadXml() {
-        $this->expectException('Bpost\BpostApiClient\Exception\XmlException\BpostXmlInvalidItemException')
+        $this->expectException('Bpost\BpostApiClient\Exception\XmlException\BpostXmlInvalidItemException');
         AtHome::createFromXML(new \SimpleXMLElement($this->getNotAtHomeXml()));
     }
 

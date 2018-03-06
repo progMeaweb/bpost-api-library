@@ -225,29 +225,33 @@ abstract class National extends ComplexAttribute implements IBox
 
         if (isset($nationalXml->options) && !empty($nationalXml->options)) {
             /** @var \SimpleXMLElement $optionData */
-            foreach ($nationalXml->options as $optionData) {
-                $optionData = $optionData->children('http://schema.post.be/shm/deepintegration/v3/common');
+            foreach ($nationalXml->options as $options) {
+                $options = $options->children('http://schema.post.be/shm/deepintegration/v3/common');
 
-                if (in_array($optionData->getName(), array(
+                foreach($options as $optionData){
+
+                    if (in_array($optionData->getName(), array(
                         Messaging::MESSAGING_TYPE_INFO_DISTRIBUTED,
                         Messaging::MESSAGING_TYPE_INFO_NEXT_DAY,
                         Messaging::MESSAGING_TYPE_INFO_REMINDER,
                         Messaging::MESSAGING_TYPE_KEEP_ME_INFORMED,
                     ))
-                ) {
-                    $option = Messaging::createFromXML($optionData);
-                } else {
-                    $className = '\\Bpost\\BpostApiClient\\Bpost\\Order\\Box\\Option\\' . ucfirst($optionData->getName());
-                    if (!method_exists($className, 'createFromXML')) {
-                        throw new BpostXmlInvalidItemException();
+                    ) {
+                        $option = Messaging::createFromXML($optionData);
+                    } else {
+                        $className = '\\Bpost\\BpostApiClient\\Bpost\\Order\\Box\\Option\\' . ucfirst($optionData->getName());
+                        if (!method_exists($className, 'createFromXML')) {
+                            throw new BpostXmlInvalidItemException();
+                        }
+                        $option = call_user_func(
+                            array($className, 'createFromXML'),
+                            $optionData
+                        );
                     }
-                    $option = call_user_func(
-                        array($className, 'createFromXML'),
-                        $optionData
-                    );
-                }
 
-                $self->addOption($option);
+                    $self->addOption($option);
+
+                }
             }
         }
 
