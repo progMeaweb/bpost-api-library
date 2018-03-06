@@ -140,4 +140,9 @@ class Cod extends Option
 
         return $cod;
     }
+
+
+    public static function createFromXML(\SimpleXMLElement $element){
+        return new static();
+    }
 }
