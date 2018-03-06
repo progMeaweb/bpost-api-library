@@ -8,7 +8,7 @@ namespace Bpost\BpostApiClient\Bpost\Order\Box\Option;
  * @copyright Copyright (c), Tijs Verkoyen. All rights reserved.
  * @license   BSD License
  */
-class CashOnDelivery extends Option
+class Cod extends Option
 {
     /**
      * @var float

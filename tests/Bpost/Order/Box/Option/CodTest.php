@@ -1,9 +1,9 @@
 <?php
 namespace Bpost;
 
-use Bpost\BpostApiClient\Bpost\Order\Box\Option\CashOnDelivery;
+use Bpost\BpostApiClient\Bpost\Order\Box\Option\Cod;
 
-class CashOnDeliveryTest extends \PHPUnit_Framework_TestCase
+class CodTest extends \PHPUnit_Framework_TestCase
 {
     /**
      * Create a generic DOM Document
@@ -20,7 +20,7 @@ class CashOnDeliveryTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * Tests CashOnDelivery->toXML
+     * Tests Cod->toXML
      */
     public function testToXML()
     {
@@ -42,7 +42,7 @@ class CashOnDeliveryTest extends \PHPUnit_Framework_TestCase
         $expectedDocument->appendChild($cod);
 
         $actualDocument = self::createDomDocument();
-        $cashOnDelivery = new CashOnDelivery(
+        $cashOnDelivery = new Cod(
             $data['cod']['codAmount'],
             $data['cod']['iban'],
             $data['cod']['bic']
@@ -71,7 +71,7 @@ class CashOnDeliveryTest extends \PHPUnit_Framework_TestCase
         $expectedDocument->appendChild($cod);
 
         $actualDocument = self::createDomDocument();
-        $cashOnDelivery = new CashOnDelivery(
+        $cashOnDelivery = new Cod(
             $data['cod']['codAmount'],
             $data['cod']['iban'],
             $data['cod']['bic']

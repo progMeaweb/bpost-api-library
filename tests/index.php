@@ -15,7 +15,7 @@ use \Bpost\BpostApiClient\Bpost\Order\Box\At247;
 use \Bpost\BpostApiClient\Bpost\Order\Box\CustomsInfo\CustomsInfo;
 use \Bpost\BpostApiClient\Bpost\Order\Box\International;
 use \Bpost\BpostApiClient\Bpost\Order\Box\Option\AutomaticSecondPresentation;
-use \Bpost\BpostApiClient\Bpost\Order\Box\Option\CashOnDelivery;
+use \Bpost\BpostApiClient\Bpost\Order\Box\Option\Cod;
 use \Bpost\BpostApiClient\Bpost\Order\Box\Option\Insured;
 use \Bpost\BpostApiClient\Bpost\Order\Box\Option\Messaging;
 use \Bpost\BpostApiClient\Bpost\Order\Box\Option\Signed;

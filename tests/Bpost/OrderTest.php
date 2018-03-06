@@ -5,7 +5,7 @@ use Bpost\BpostApiClient\Bpost\Order;
 use Bpost\BpostApiClient\Bpost\Order\Address;
 use Bpost\BpostApiClient\Bpost\Order\Box;
 use Bpost\BpostApiClient\Bpost\Order\Box\AtBpost;
-use Bpost\BpostApiClient\Bpost\Order\Box\Option\CashOnDelivery;
+use Bpost\BpostApiClient\Bpost\Order\Box\Option\Cod;
 use Bpost\BpostApiClient\Bpost\Order\Box\Option\Messaging;
 use Bpost\BpostApiClient\Bpost\Order\Box\Option\SaturdayDelivery;
 use Bpost\BpostApiClient\Bpost\Order\Line;
@@ -54,7 +54,7 @@ class OrderTest extends \PHPUnit_Framework_TestCase
             new Messaging('keepMeInformed', 'EN', null, '0032475123456'),
         ));
         $atBpost->addOption(new SaturdayDelivery());
-        $atBpost->addOption(new CashOnDelivery(1251, 'BE19210023508812', 'GEBABEBB'));
+        $atBpost->addOption(new Cod(1251, 'BE19210023508812', 'GEBABEBB'));
 
         $atBpost->setWeight(2000);
 
