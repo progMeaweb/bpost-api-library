@@ -238,12 +238,11 @@ class Messaging extends Option
             $xml->getName(), (string) $xml->attributes()->language
         );
 
-        $data = $xml->{$xml->getName()};
-        if (isset($data->emailAddress) && $data->emailAddress != '') {
-            $messaging->setEmailAddress((string) $data->emailAddress);
+        if (isset($xml->emailAddress) && $xml->emailAddress != '') {
+            $messaging->setEmailAddress((string) $xml->emailAddress);
         }
-        if (isset($data->mobilePhone) && $data->mobilePhone != '') {
-            $messaging->setMobilePhone((string) $data->mobilePhone);
+        if (isset($xml->mobilePhone) && $xml->mobilePhone != '') {
+            $messaging->setMobilePhone((string) $xml->mobilePhone);
         }
 
         return $messaging;
