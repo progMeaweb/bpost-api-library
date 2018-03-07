@@ -26,7 +26,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
     {
         $expectedDocument = self::createDomDocument();
         $expectedDocument->appendChild(
-            $expectedDocument->createElement('signed')
+            $expectedDocument->createElement('common:signed')
         );
 
         $actualDocument = self::createDomDocument();
@@ -35,7 +35,7 @@ class SignatureTest extends \PHPUnit_Framework_TestCase
             $signature->toXML($actualDocument)
         );
 
-        $this->assertEquals($expectedDocument, $actualDocument);
+        $this->assertEquals($expectedDocument->saveXMl(), $actualDocument->saveXML());
 
         $expectedDocument = self::createDomDocument();
         $expectedDocument->appendChild(
