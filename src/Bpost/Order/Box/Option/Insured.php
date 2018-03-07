@@ -16,6 +16,7 @@ class Insured extends Option
     const INSURANCE_TYPE_BASIC_INSURANCE = 'basicInsurance';
     const INSURANCE_TYPE_ADDITIONAL_INSURANCE = 'additionalInsurance';
 
+    const INSURANCE_AMOUNT_UP_TO_500_EUROS = 1;
     const INSURANCE_AMOUNT_UP_TO_2500_EUROS = 2;
     const INSURANCE_AMOUNT_UP_TO_5000_EUROS = 3;
     const INSURANCE_AMOUNT_UP_TO_7500_EUROS = 4;
@@ -96,6 +97,7 @@ class Insured extends Option
     public static function getPossibleValueValues()
     {
         return array(
+            self::INSURANCE_AMOUNT_UP_TO_500_EUROS,
             self::INSURANCE_AMOUNT_UP_TO_2500_EUROS,
             self::INSURANCE_AMOUNT_UP_TO_5000_EUROS,
             self::INSURANCE_AMOUNT_UP_TO_7500_EUROS,
@@ -156,13 +158,7 @@ class Insured extends Option
         }
         elseif (isset($data->{static::INSURANCE_TYPE_ADDITIONAL_INSURANCE})) {
             $value = (int)$data->{static::INSURANCE_TYPE_ADDITIONAL_INSURANCE}->attributes()->value;
-            if ($value == 1) {
-                $type = static::INSURANCE_TYPE_BASIC_INSURANCE;
-                $value = null;
-            }
-            else {
-                $type = static::INSURANCE_TYPE_ADDITIONAL_INSURANCE;
-            }
+            $type = static::INSURANCE_TYPE_ADDITIONAL_INSURANCE;
         }
 
         $insured = new static();
