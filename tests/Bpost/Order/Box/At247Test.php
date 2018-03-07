@@ -120,6 +120,33 @@ class At247Test extends \PHPUnit_Framework_TestCase
         $this->assertSame($expectedDocument->saveXML(), $actualDocument->saveXML());
     }
 
+    public function testCreateFromXml(){
+        $at247 = At247::createFromXML(simplexml_load_string($this->getXml()));
+
+        $this->assertSame('bpack 24/7', $at247->getProduct());
+        $this->assertCount(2, $at247->getOptions());
+        $this->assertSame(1234, $at247->getWeight());
+
+        $this->assertSame('RECEIVER NAME', $at247->getReceiverName());
+
+        $this->assertSame('99999', $at247->getParcelsDepotId());
+        $this->assertSame('SOME DEPOT', $at247->getParcelsDepotName());
+        $parcel = $at247->getParcelsDepotAddress();
+
+        $this->assertSame('DEPOT STREET', $parcel->getStreetName());
+        $this->assertSame('1111', $parcel->getNumber());
+        $this->assertSame('9999', $parcel->getPostalCode());
+        $this->assertSame('SIN CITY', $parcel->getLocality());
+        $this->assertSame('BE', $parcel->getCountryCode());
+
+        $member = $at247->getUnregisteredParcelLockerMember();
+
+        $this->assertSame('NL', $member->getLanguage());
+        $this->assertSame('123456789', $member->getMobilePhone());
+        $this->assertSame('someone@somedomain.be', $member->getEmailAddress());
+
+    }
+
     /**
      * Test validation in the setters
      */
@@ -138,5 +165,41 @@ class At247Test extends \PHPUnit_Framework_TestCase
 
         // Exceptions were caught,
         $this->assertTrue(true);
+    }
+
+    private function getXml()
+    {
+        return <<<EOF
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<at24-7 xmlns="http://schema.post.be/shm/deepintegration/v3/"
+        xmlns:ns2="http://schema.post.be/shm/deepintegration/v3/common"
+        xmlns:ns3="http://schema.post.be/shm/deepintegration/v3/national">
+    <ns3:product>bpack 24/7</ns3:product>
+    <ns3:weight>1234</ns3:weight>
+    <ns3:openingHours/>
+    <ns3:parcelsDepotId>99999</ns3:parcelsDepotId>
+    <ns3:parcelsDepotName>SOME DEPOT</ns3:parcelsDepotName>
+    <ns3:parcelsDepotAddress>
+        <ns2:streetName>DEPOT STREET</ns2:streetName>
+        <ns2:number>1111</ns2:number>
+        <ns2:postalCode>9999</ns2:postalCode>
+        <ns2:locality>SIN CITY</ns2:locality>
+        <ns2:countryCode>BE</ns2:countryCode>
+    </ns3:parcelsDepotAddress>
+    <ns3:options>
+        <ns2:insured>
+            <ns2:additionalInsurance value="3"/>
+        </ns2:insured>
+        <ns2:signed/>
+    </ns3:options>
+    <ns3:unregistered>
+        <ns3:language>NL</ns3:language>
+        <ns3:mobilePhone>123456789</ns3:mobilePhone>
+        <ns3:emailAddress>someone@somedomain.be</ns3:emailAddress>
+    </ns3:unregistered>
+    <ns3:receiverName>RECEIVER NAME</ns3:receiverName>
+</at24-7>
+EOF;
+
     }
 }

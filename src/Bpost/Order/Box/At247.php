@@ -306,84 +306,86 @@ class At247 extends National
     {
         $at247 = new At247();
 
-        if (isset($xml->{'at24-7'}->product) && $xml->{'at24-7'}->product != '') {
+        $national = $xml->children('http://schema.post.be/shm/deepintegration/v3/national');
+
+        if (isset($national->product) && $national->product != '') {
             $at247->setProduct(
-                (string)$xml->{'at24-7'}->product
+                (string)$national->product
             );
         }
-        if (isset($xml->{'at24-7'}->options)) {
-            /** @var \SimpleXMLElement $optionData */
-            foreach ($xml->{'at24-7'}->options as $optionData) {
-                $optionData = $optionData->children('http://schema.post.be/shm/deepintegration/v3/common');
+        if (isset($national->options)) {
+            /** @var \SimpleXMLElement $options */
+            foreach ($national->options as $options) {
+                $options = $options->children('http://schema.post.be/shm/deepintegration/v3/common');
 
-                if (in_array($optionData->getName(), array(Messaging::MESSAGING_TYPE_INFO_DISTRIBUTED))) {
-                    $option = Messaging::createFromXML($optionData);
-                } else {
-                    $className = '\\Bpost\\BpostApiClient\\Bpost\\Order\\Box\\Option\\' . ucfirst($optionData->getName());
-                    if ( ! method_exists($className, 'createFromXML')) {
-                        throw new BpostNotImplementedException();
+                foreach($options as $optionData){
+                    if (in_array($optionData->getName(), array(Messaging::MESSAGING_TYPE_INFO_DISTRIBUTED))) {
+                        $option = Messaging::createFromXML($optionData);
+                    } else {
+                        $className = '\\Bpost\\BpostApiClient\\Bpost\\Order\\Box\\Option\\' . ucfirst($optionData->getName());
+                        if ( ! method_exists($className, 'createFromXML')) {
+                            throw new BpostNotImplementedException();
+                        }
+                        $option = call_user_func(
+                            array($className, 'createFromXML'),
+                            $optionData
+                        );
                     }
-                    $option = call_user_func(
-                        array($className, 'createFromXML'),
-                        $optionData
-                    );
-                }
 
-                $at247->addOption($option);
+                    $at247->addOption($option);
+                }
             }
         }
-        if (isset($xml->{'at24-7'}->weight) && $xml->{'at24-7'}->weight != '') {
+        if (isset($national->weight) && $national->weight != '') {
             $at247->setWeight(
-                (int)$xml->{'at24-7'}->weight
+                (int)$national->weight
             );
         }
-        if (isset($xml->{'at24-7'}->memberId) && $xml->{'at24-7'}->memberId != '') {
+        if (isset($national->memberId) && $national->memberId != '') {
             $at247->setMemberId(
-                (string)$xml->{'at24-7'}->memberId
+                (string)$national->memberId
             );
         }
 
-        if(isset($xml->{'at24-7'}->unregistered) && $xml->{'at24-7'}->unregistered != '')
+        if(isset($national->unregistered) && $national->unregistered != '')
         {
-            $unregisteredMember = $xml->{'at24-7'}->unregistered->children(
-                'http://schema.post.be/shm/deepintegration/v3/common'
-            );
+            $unregistered = $national->unregistered->children('http://schema.post.be/shm/deepintegration/v3/national');
 
-            $at247->setUnregisteredParcelLockerMember(UnregisteredParcelLockerMember::createFromXml($unregisteredMember));
+            $at247->setUnregisteredParcelLockerMember(UnregisteredParcelLockerMember::createFromXml($unregistered));
         }
 
-        if (isset($xml->{'at24-7'}->receiverName) && $xml->{'at24-7'}->receiverName != '') {
+        if (isset($national->receiverName) && $national->receiverName != '') {
             $at247->setReceiverName(
-                (string)$xml->{'at24-7'}->receiverName
+                (string)$national->receiverName
             );
         }
-        if (isset($xml->{'at24-7'}->receiverCompany) && $xml->{'at24-7'}->receiverCompany != '') {
+        if (isset($national->receiverCompany) && $national->receiverCompany != '') {
             $at247->setReceiverCompany(
-                (string)$xml->{'at24-7'}->receiverCompany
+                (string)$national->receiverCompany
             );
         }
-        if (isset($xml->{'at24-7'}->parcelsDepotId) && $xml->{'at24-7'}->parcelsDepotId != '') {
+        if (isset($national->parcelsDepotId) && $national->parcelsDepotId != '') {
             $at247->setParcelsDepotId(
-                (string)$xml->{'at24-7'}->parcelsDepotId
+                (string)$national->parcelsDepotId
             );
         }
-        if (isset($xml->{'at24-7'}->parcelsDepotName) && $xml->{'at24-7'}->parcelsDepotName != '') {
+        if (isset($national->parcelsDepotName) && $national->parcelsDepotName != '') {
             $at247->setParcelsDepotName(
-                (string)$xml->{'at24-7'}->parcelsDepotName
+                (string)$national->parcelsDepotName
             );
         }
-        if (isset($xml->{'at24-7'}->parcelsDepotAddress)) {
+        if (isset($national->parcelsDepotAddress)) {
             /** @var \SimpleXMLElement $parcelsDepotAddressData */
-            $parcelsDepotAddressData = $xml->{'at24-7'}->parcelsDepotAddress->children(
+            $parcelsDepotAddressData = $national->parcelsDepotAddress->children(
                 'http://schema.post.be/shm/deepintegration/v3/common'
             );
             $at247->setParcelsDepotAddress(
                 ParcelsDepotAddress::createFromXML($parcelsDepotAddressData)
             );
         }
-        if (isset($xml->{'at24-7'}->requestedDeliveryDate) && $xml->{'at24-7'}->requestedDeliveryDate != '') {
+        if (isset($national->requestedDeliveryDate) && $national->requestedDeliveryDate != '') {
             $at247->setRequestedDeliveryDate(
-                (string)$xml->{'at24-7'}->requestedDeliveryDate
+                (string)$national->requestedDeliveryDate
             );
         }
 
