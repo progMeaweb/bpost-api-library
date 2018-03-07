@@ -21,7 +21,7 @@ abstract class National extends ComplexAttribute implements IBox
     protected $product;
 
     /** @var Option[] */
-    protected $options;
+    protected $options = array();
 
     /** @var int */
     protected $weight;
