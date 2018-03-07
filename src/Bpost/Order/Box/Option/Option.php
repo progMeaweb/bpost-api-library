@@ -15,5 +15,5 @@ abstract class Option
      * @param string       $prefix
      * @return \DOMElement
      */
-    abstract public function toXML(\DOMDocument $document, $prefix = null);
+    abstract public function toXML(\DOMDocument $document, $prefix = 'common');
 }
