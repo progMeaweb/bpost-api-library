@@ -258,83 +258,88 @@ class AtBpost extends National
     {
         $atBpost = new AtBpost();
 
-        if (isset($xml->atBpost->product) && $xml->atBpost->product != '') {
+        $national = $xml->children('http://schema.post.be/shm/deepintegration/v3/national');
+
+        if (isset($national->product) && $national->product != '') {
             $atBpost->setProduct(
-                (string)$xml->atBpost->product
+                (string)$national->product
             );
         }
-        if (isset($xml->atBpost->options)) {
-            /** @var \SimpleXMLElement $optionData */
-            foreach ($xml->atBpost->options as $optionData) {
-                $optionData = $optionData->children('http://schema.post.be/shm/deepintegration/v3/common');
+        if (isset($national->options)) {
+            /** @var \SimpleXMLElement $options */
+            foreach ($national->options as $options) {
+                $options = $options->children('http://schema.post.be/shm/deepintegration/v3/common');
 
-                if (in_array(
-                    $optionData->getName(),
-                    array(
-                        Messaging::MESSAGING_TYPE_INFO_DISTRIBUTED,
-                        Messaging::MESSAGING_TYPE_INFO_NEXT_DAY,
-                        Messaging::MESSAGING_TYPE_INFO_REMINDER,
-                        Messaging::MESSAGING_TYPE_KEEP_ME_INFORMED,
+
+                foreach($options as $optionData){
+                    if (in_array(
+                        $optionData->getName(),
+                        array(
+                            Messaging::MESSAGING_TYPE_INFO_DISTRIBUTED,
+                            Messaging::MESSAGING_TYPE_INFO_NEXT_DAY,
+                            Messaging::MESSAGING_TYPE_INFO_REMINDER,
+                            Messaging::MESSAGING_TYPE_KEEP_ME_INFORMED,
+                        )
                     )
-                )
-                ) {
-                    $option = Messaging::createFromXML($optionData);
-                } else {
-                    $className = '\\Bpost\\BpostApiClient\\Bpost\\Order\\Box\\Option\\' . ucfirst($optionData->getName());
-                    if (!method_exists($className, 'createFromXML')) {
-                        throw new BpostNotImplementedException();
+                    ) {
+                        $option = Messaging::createFromXML($optionData);
+                    } else {
+                        $className = '\\Bpost\\BpostApiClient\\Bpost\\Order\\Box\\Option\\' . ucfirst($optionData->getName());
+                        if (!method_exists($className, 'createFromXML')) {
+                            throw new BpostNotImplementedException($className);
+                        }
+                        $option = call_user_func(
+                            array($className, 'createFromXML'),
+                            $optionData
+                        );
                     }
-                    $option = call_user_func(
-                        array($className, 'createFromXML'),
-                        $optionData
-                    );
-                }
 
-                $atBpost->addOption($option);
+                    $atBpost->addOption($option);
+                }
             }
         }
-        if (isset($xml->atBpost->weight) && $xml->atBpost->weight != '') {
+        if (isset($national->weight) && $national->weight != '') {
             $atBpost->setWeight(
-                (int)$xml->atBpost->weight
+                (int)$national->weight
             );
         }
-        if (isset($xml->atBpost->receiverName) && $xml->atBpost->receiverName != '') {
+        if (isset($national->receiverName) && $national->receiverName != '') {
             $atBpost->setReceiverName(
-                (string)$xml->atBpost->receiverName
+                (string)$national->receiverName
             );
         }
-        if (isset($xml->atBpost->receiverCompany) && $xml->atBpost->receiverCompany != '') {
+        if (isset($national->receiverCompany) && $national->receiverCompany != '') {
             $atBpost->setReceiverCompany(
-                (string)$xml->atBpost->receiverCompany
+                (string)$national->receiverCompany
             );
         }
-        if (isset($xml->atBpost->pugoId) && $xml->atBpost->pugoId != '') {
+        if (isset($national->pugoId) && $national->pugoId != '') {
             $atBpost->setPugoId(
-                (string)$xml->atBpost->pugoId
+                (string)$national->pugoId
             );
         }
-        if (isset($xml->atBpost->pugoName) && $xml->atBpost->pugoName != '') {
+        if (isset($national->pugoName) && $national->pugoName != '') {
             $atBpost->setPugoName(
-                (string)$xml->atBpost->pugoName
+                (string)$national->pugoName
             );
         }
-        if (isset($xml->atBpost->pugoAddress)) {
+        if (isset($national->pugoAddress)) {
             /** @var \SimpleXMLElement $pugoAddressData */
-            $pugoAddressData = $xml->atBpost->pugoAddress->children(
+            $pugoAddressData = $national->pugoAddress->children(
                 'http://schema.post.be/shm/deepintegration/v3/common'
             );
             $atBpost->setPugoAddress(
                 PugoAddress::createFromXML($pugoAddressData)
             );
         }
-        if (isset($xml->atBpost->requestedDeliveryDate) && $xml->atBpost->requestedDeliveryDate != '') {
+        if (isset($national->requestedDeliveryDate) && $national->requestedDeliveryDate != '') {
             $atBpost->setRequestedDeliveryDate(
-                (string)$xml->atBpost->requestedDeliveryDate
+                (string)$national->requestedDeliveryDate
             );
         }
-        if (isset($xml->atBpost->shopHandlingInstruction) && $xml->atBpost->shopHandlingInstruction != '') {
+        if (isset($national->shopHandlingInstruction) && $national->shopHandlingInstruction != '') {
             $atBpost->setShopHandlingInstruction(
-                (string)$xml->atBpost->shopHandlingInstruction
+                (string)$national->shopHandlingInstruction
             );
         }
 

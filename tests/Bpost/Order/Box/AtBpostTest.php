@@ -115,4 +115,59 @@ class AtBpostTest extends \PHPUnit_Framework_TestCase
         // Exceptions were caught,
         $this->assertTrue(true);
     }
+
+    public function testCreateFromXML(){
+
+        $atBpost = AtBpost::createFromXML(simplexml_load_string($this->getXml()));
+
+        $this->assertSame('bpack@bpost', $atBpost->getProduct());
+        $this->assertCount(2, $atBpost->getOptions());
+        $this->assertSame(500, $atBpost->getWeight());
+
+        $this->assertSame('RECEIVER COMPANY', $atBpost->getReceiverCompany());
+        $this->assertSame('RECEIVER NAME', $atBpost->getReceiverName());
+
+        $this->assertSame('555555', $atBpost->getPugoId());
+        $this->assertSame('SOME PUGO', $atBpost->getPugoName());
+
+        $pugo = $atBpost->getPugoAddress();
+
+        $this->assertSame("PUGOSTREET", $pugo->getStreetName());
+        $this->assertSame("999", $pugo->getNumber());
+        $this->assertSame("9876", $pugo->getPostalCode());
+        $this->assertSame("SIN CITY 2", $pugo->getLocality());
+        $this->assertSame("BE", $pugo->getCountryCode());
+    }
+
+    private function getXml()
+    {
+        return <<<EOF
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<atBpost xmlns="http://schema.post.be/shm/deepintegration/v3/"
+        xmlns:ns2="http://schema.post.be/shm/deepintegration/v3/common"
+        xmlns:ns3="http://schema.post.be/shm/deepintegration/v3/national">
+    <ns3:product>bpack@bpost</ns3:product>
+    <ns3:options>
+        <ns2:keepMeInformed language="NL">
+            <ns2:emailAddress>someoneelse@somedomain.be</ns2:emailAddress>
+        </ns2:keepMeInformed>
+        <ns2:signed/>
+    </ns3:options>
+    <ns3:weight>500</ns3:weight>
+    <ns3:openingHours/>
+    <ns3:pugoId>555555</ns3:pugoId>
+    <ns3:pugoName>SOME PUGO</ns3:pugoName>
+    <ns3:pugoAddress>
+        <ns2:streetName>PUGOSTREET</ns2:streetName>
+        <ns2:number>999</ns2:number>
+        <ns2:postalCode>9876</ns2:postalCode>
+        <ns2:locality>SIN CITY 2</ns2:locality>
+        <ns2:countryCode>BE</ns2:countryCode>
+    </ns3:pugoAddress>
+    <ns3:receiverName>RECEIVER NAME</ns3:receiverName>
+    <ns3:receiverCompany>RECEIVER COMPANY</ns3:receiverCompany>
+</atBpost>
+EOF;
+
+    }
 }
