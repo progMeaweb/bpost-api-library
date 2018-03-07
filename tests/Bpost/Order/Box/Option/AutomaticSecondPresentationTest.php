@@ -26,7 +26,7 @@ class AutomaticSecondPresentationTest extends \PHPUnit_Framework_TestCase
     {
         $expectedDocument = self::createDomDocument();
         $expectedDocument->appendChild(
-            $expectedDocument->createElement('automaticSecondPresentation')
+            $expectedDocument->createElement('common:automaticSecondPresentation')
         );
 
         $actualDocument = self::createDomDocument();
@@ -35,7 +35,7 @@ class AutomaticSecondPresentationTest extends \PHPUnit_Framework_TestCase
             $automaticSecondPresentation->toXML($actualDocument)
         );
 
-        $this->assertEquals($expectedDocument, $actualDocument);
+        $this->assertEquals($expectedDocument->saveXML(), $actualDocument->saveXML());
 
         $expectedDocument = self::createDomDocument();
         $expectedDocument->appendChild(
